@@ -14,6 +14,9 @@ from flask import redirect, jsonify
 controller = Blueprint("main", __name__)
 
 from db import MySQL_DB
+from config import Config
+
+import os
 
 
 def process_post_data(stringData):
@@ -39,7 +42,7 @@ def get_all_songs():
 	return rows
 
 
-def save_new_song(formData):
+def save_new_song(formData, files):
 	saveQuery = """
 		INSERT INTO songs (title, artist, album)
 		VALUES ('%s', '%s', '%s')
@@ -51,6 +54,10 @@ def save_new_song(formData):
 
 	try:
 		resCursor = MySQL_DB.query(saveQuery, commit=True)
+		file = files["file"]
+		file.save(os.path.join(
+			Config.PROJECT_DIR, "media", str(resCursor.lastrowid) + ".mp3"
+		))
 		return True
 	except Exception as excp:
 		return False
@@ -64,6 +71,19 @@ def delete_one_song(songId):
 		)
 	except Exception as excp:
 		return False
+
+
+def search_song_by_query(query):
+	searchQuery = """
+		SELECT * FROM songs
+		WHERE title LIKE '%{0}%' OR
+		artist LIKE '%{0}%' OR
+		album LIKE '%{0}%'
+	""".format(query)
+
+	resCursor = MySQL_DB.query(searchQuery)
+	rows = resCursor.fetchall()
+	return rows
 
 
 @controller.route("/", methods=["GET", "POST"])
@@ -83,7 +103,7 @@ def create_song():
 		):
 			saved = False
 		else:
-			saved = save_new_song(request.form)
+			saved = save_new_song(request.form, request.files)
 		return render_template("song.html", saved=saved)
 	elif request.method == "DELETE":
 		data = process_post_data(request.data)
@@ -105,9 +125,17 @@ def view_song(songId):
 		data = get_one_song(songId)
 		return render_template("view.html", data=data)
 	elif request.method == "DELETE":
-		print(request.form)
 		return render_template("song.html", saved=saved)
 
+
+@controller.route("/search", methods=["POST"])
+def search_songs():
+	if request.form["Search"]:
+		rows = search_song_by_query(request.form["Search"])
+	else:
+		rows = get_all_songs()
+	return render_template("index.html", rows=rows)
 	
+
 
 

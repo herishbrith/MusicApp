@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>MusicApp - Song</title>
+	<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 	<script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>
 </head>
 
@@ -15,11 +16,10 @@
 			<tr><td>Artist</td><td>{{ data[2] }}</td></tr>
 			<tr><td>Album</td><td>{{ data[3] }}</td></tr>
 			<tr>
-				<!-- <td><input type="submit" value="Save" formaction="/new" formmethod="post"></td> -->
 				<td>
 					<input type="button" value="Delete" onclick="delete_button_clicked({{ data[0] }})">
 				</td>
-				<td><input type="submit" value="Back" formaction="/" formmethod="post"></td>
+				<td><input type="button" value="Back" onclick="go_to_home()"></td>
 			</tr>
 			<tr></tr>
 		</table>

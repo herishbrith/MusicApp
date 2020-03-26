@@ -2,10 +2,12 @@
 <html>
 <head>
 	<title>MusicApp</title>
+	<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+	<script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>
 </head>
 
 <style type="text/css">
-	table {
+	#content-table {
 		margin: auto;
 		width: calc(100% - 40px);
 	}
@@ -15,16 +17,21 @@
 	}
 </style>
 
-<script type="text/javascript">
-	
-</script>
-
 <body>
 	<h1>MusicApp</h1>
 	<a href="/song"><button>New</button></a>
 
 	<h3>All songs</h3>
-	<table border=1>
+	<form>
+		<table>
+			<thead>
+				<td>Search</td>
+				<td><input type="text" name="Search"></td>
+				<td><input type="submit" value="Search" formaction="/search" formmethod="post"></td>
+			</thead>
+		</table>
+	</form>
+	<table border=1 id="content-table">
 		<thead>
 			<td>ID</td>
 			<td>TITLE</td>

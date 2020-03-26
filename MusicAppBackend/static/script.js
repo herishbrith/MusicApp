@@ -1,5 +1,6 @@
 function delete_button_clicked(songId) {
 	console.log("hit");
+
 	var action = window.confirm("Do you really want to delete this song?");
 	if (action) {
 		send_delete_request(songId);
@@ -18,6 +19,10 @@ function send_delete_request(songId) {
 	}
 	xhttp.open("DELETE", "/song");
 	xhttp.send("id=" + songId);
+}
+
+function go_to_home() {
+	window.location.href = window.location.origin;
 }
 
 
