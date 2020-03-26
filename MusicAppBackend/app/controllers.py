@@ -92,9 +92,13 @@ def search_song_by_query(query):
 	return rows
 
 
-@controller.route("/", methods=["GET"])
+@controller.route("/", methods=["GET", "POST"])
 def get_homepage():
-	rows = get_all_songs()
+	if request.method == "GET" or \
+	(request.method == "POST" and not request.form["Search"]):
+		rows = get_all_songs()
+	else:
+		rows = search_song_by_query(request.form["Search"])
 	return render_template("index.html", rows=rows)
 
 
@@ -133,15 +137,6 @@ def view_song(songId):
 	elif request.method == "DELETE":
 		return render_template("song.html", saved=saved)
 
-
-@controller.route("/search", methods=["POST"])
-def search_songs():
-	if request.form["Search"]:
-		rows = search_song_by_query(request.form["Search"])
-	else:
-		rows = get_all_songs()
-	return render_template("index.html", rows=rows)
 	
-
 
 
