@@ -8,18 +8,23 @@
 
 <body>
 	<h1>MusicApp</h1>
-	<h3>Song</h3>
+	<h3>Public URL: /static/media/{{ data[0] }}.mp3</h3>
 
 	<form>  
 		<table>
 			<tr><td>Title</td><td>{{ data[1] }}</td></tr>
 			<tr><td>Artist</td><td>{{ data[2] }}</td></tr>
 			<tr><td>Album</td><td>{{ data[3] }}</td></tr>
+			<tr><td>
+				<audio controls>
+					<source src="/static/media/{{ data[0] }}.mp3" type="audio/mpeg">
+				</audio>
+			</td></tr>
 			<tr>
 				<td>
 					<input type="button" value="Delete" onclick="delete_button_clicked({{ data[0] }})">
 				</td>
-				<td><input type="button" value="Back" onclick="go_to_home()"></td>
+				<td><input type="button" value="Go To Home" onclick="go_to_home()"></td>
 			</tr>
 			<tr></tr>
 		</table>

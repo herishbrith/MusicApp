@@ -56,7 +56,7 @@ def save_new_song(formData, files):
 		resCursor = MySQL_DB.query(saveQuery, commit=True)
 		file = files["file"]
 		file.save(os.path.join(
-			Config.PROJECT_DIR, "media", str(resCursor.lastrowid) + ".mp3"
+			Config.PROJECT_DIR, "static", "media", str(resCursor.lastrowid) + ".mp3"
 		))
 		return True
 	except Exception as excp:
@@ -69,6 +69,12 @@ def delete_one_song(songId):
 			"DELETE FROM songs WHERE id=%s" % (songId),
 			commit=True
 		)
+
+		filePath = os.path.join(
+			Config.PROJECT_DIR, "static", "media", str(songId) + ".mp3"
+		)
+		if os.path.isfile(filePath): os.remove(filePath)
+		return True
 	except Exception as excp:
 		return False
 
@@ -86,14 +92,14 @@ def search_song_by_query(query):
 	return rows
 
 
-@controller.route("/", methods=["GET", "POST"])
-def get_home_page():
+@controller.route("/", methods=["GET"])
+def get_homepage():
 	rows = get_all_songs()
 	return render_template("index.html", rows=rows)
 
 
 @controller.route("/song", methods=["GET", "POST", "DELETE"])
-def create_song():
+def song_functionality():
 	if request.method == "GET":
 		return render_template("song.html")
 	elif request.method == "POST":
