@@ -1,4 +1,4 @@
-MusicApp
+#MusicApp
 
 To run this application, follow these steps:
 1. Clone this repository
@@ -8,3 +8,8 @@ To run this application, follow these steps:
 5. Install required packages using command, pip install -r requirements.txt
 6. cd into MusicAppBackend
 7. Run the app, python app.py
+
+## Pre-requisites
+Python3+
+pip
+virtualenv
