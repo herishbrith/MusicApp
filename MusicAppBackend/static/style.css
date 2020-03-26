@@ -1,0 +1,12 @@
+#content-table {
+	margin: auto;
+	width: calc(100% - 40px);
+}
+td {
+	text-align: center;
+	vertical-align: middle;
+}
+
+
+
+

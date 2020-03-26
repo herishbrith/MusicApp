@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MusicApp</title>
+	<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+	<script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>
+</head>
+
+<style type="text/css">
+	#content-table {
+		margin: auto;
+		width: calc(100% - 40px);
+	}
+	td {
+		text-align: center;
+		vertical-align: middle;
+	}
+</style>
+
+<body>
+	<h1>MusicApp</h1>
+	<a href="/song"><button>New</button></a>
+
+	<h3>All songs</h3>
+	<form>
+		<table>
+			<thead>
+				<td>Search</td>
+				<td><input type="text" name="Search"></td>
+				<td><input type="submit" value="Search" formaction="/" formmethod="post"></td>
+			</thead>
+		</table>
+	</form>
+	<table border=1 id="content-table">
+		<thead>
+			<td>ID</td>
+			<td>TITLE</td>
+			<td>ARTIST</td>
+			<td>ALBUM</td>
+		</thead>
+
+		{% for row in rows %}
+			<tr>
+				<td>{{ row[0] }}</td>
+				<td><a href="/view/{{ row[0] }}">{{ row[1] }}</a></td>
+				<td>{{ row[2] }}</td>
+				<td>{{ row[3] }}</td>
+			</tr>	
+		{% endfor %}
+	</table>
+</body>
+</html>

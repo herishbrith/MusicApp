@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MusicApp - Song</title>
+	<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+	<script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>
+</head>
+<body>
+	<h1>MusicApp</h1>
+	<h3>Add new song</h3>
+
+	<form enctype="multipart/form-data">  
+		<table>
+			<tr><td>Title*</td><td><input type="text" name="title" required /></td></tr>
+			<tr><td>Artist*</td><td><input type="text" name="artist" required /></td></tr>
+			<tr><td>Album*</td><td><input type="text" name="album" required /></td></tr>
+			<tr><td>Song File*</td><td><input type="file" name="file" id="song" accept=".mp3" required /></td></tr>
+			<tr>
+				<td><input type="submit" value="Save" formaction="/song" formmethod="post" /></td>
+				<td><input type="button" value="Go To Home" onclick="go_to_home()"></td>
+			</tr>
+			<tr></tr>
+		</table>
+	</form>
+	{% if saved == True %}
+		<font color="green">SAVED!!!</font>
+	{% elif saved == False %}
+		<font color="red">ERROR!!!</font>
+	{% endif %}
+</body>
+</html>
