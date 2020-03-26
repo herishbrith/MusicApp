@@ -8,7 +8,11 @@
 
 <body>
 	<h1>MusicApp</h1>
-	<h3>Public URL: /static/media/{{ data[0] }}.mp3</h3>
+	<h3>Public URL: 
+		<a href="/static/media/{{ data[0] }}.mp3" target="_blank">
+			<font id="base-url-font" /></font>/static/media/{{ data[0] }}.mp3
+		</a>
+	</h3>
 
 	<form>  
 		<table>

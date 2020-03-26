@@ -25,6 +25,17 @@ function go_to_home() {
 	window.location.href = window.location.origin;
 }
 
+function setText(id, newValue) {
+	var elem = document.getElementById(id);
+	if (elem) {
+		elem.innerHTML = newValue;
+	}
+}
+
+window.onload = function() {
+	setText("base-url-font", window.location.origin);
+}
+
 
 
 
