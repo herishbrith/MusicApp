@@ -21,14 +21,15 @@ from db import MySQL_DB
 
 
 # Create app and register URLs
-app = Flask(__name__)
+app = Flask(__name__, template_folder="templates")
 app.register_blueprint(
 	AppControllers.controller,
-	url_prefix="/app/"
+	url_prefix="/"
 )
 
 # Initiate DB connection
 MySQL_DB.initiate_app(app)
+MySQL_DB.set_connection()
 
 # Configure the app and start running
 if __name__ == "__main__":
@@ -37,6 +38,8 @@ if __name__ == "__main__":
 		host=Config.HOST,
 		port=Config.PORT
 	)
+
+	Config.PROJECT_DIR = app.instance_path
 
 
 

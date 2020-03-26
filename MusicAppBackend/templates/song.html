@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MusicApp - Song</title>
+</head>
+<body>
+	<h1>MusicApp</h1>
+	<h3>Add new song</h3>
+
+	<form>  
+		<table>
+			<tr><td>Title</td><td><input type="text" name="title"></td></tr>
+			<tr><td>Artist</td><td><input type="text" name="artist"></td></tr>
+			<tr><td>Album</td><td><input type="text" name="album"></td></tr>
+			<tr>
+				<td><input type="submit" value="Save" formaction="/song" formmethod="post"></td>
+				<td><input type="submit" value="Back" formaction="/" formmethod="post"></td>
+			</tr>
+			<tr></tr>
+		</table>
+	</form>
+	{% if saved == True %}
+		<font color="green">SAVED!!!</font>
+	{% elif saved == False %}
+		<font color="red">ERROR!!!</font>
+	{% endif %}
+</body>
+</html>

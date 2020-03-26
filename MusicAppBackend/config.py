@@ -15,10 +15,10 @@ class Config:
 	"""
 
 	# app config variables
-	DEBUG = False
+	DEBUG = True
 	HOST = "0.0.0.0"
 	PORT = 8000
-	DROP_INTRUDER_REQUESTS = True
+	PROJECT_DIR = ""
 
 	# DB credentials
 	MYSQL_DATABASE_USER = ""
