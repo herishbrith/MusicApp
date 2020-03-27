@@ -13,3 +13,5 @@ virtualenv
 5. Install required packages using command, pip install -r requirements.txt
 6. cd into MusicAppBackend
 7. Run the app, python app.py
+8. Access link localhost:8000
+Note: App will run on port 8000 which can be changed in config.py
